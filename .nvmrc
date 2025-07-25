@@ -1,0 +1,15 @@
+pragma solidity ^0.8.0;
+
+contract OptimizedContract {
+    mapping(address => uint256) private balances;
+
+    function transfer(address _to, uint256 _amount) external {
+        require(balances[msg.sender] >= _amount, "Insufficient balance");
+        balances[msg.sender] -= _amount;
+        balances[_to] += _amount;
+    }
+
+    function getBalance(address _owner) external view returns (uint256) {
+        return balances[_owner];
+    }
+}
